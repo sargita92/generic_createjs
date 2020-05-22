@@ -1,3 +1,32 @@
+.newProduct{
+    max-width: 700px;
+    margin: 20px auto 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.newProduct a{
+    width: 100%;
+    height: 42px;
+    border-radius: 5px;
+    border: 2px solid #da552f;
+    background: none;
+    margin-top: 10px;
+    background: #da552f;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.newProduct a:hover{
+    opacity: 0.7;
+}
+
 .product-list{
     max-width: 700px;
     margin: 20px auto 0;
@@ -62,11 +91,6 @@
 }
 
 .product-list .actions button[disabled]{
-    opacity: 0.5;
-    cursor: default;
-}
-
-.product-list .actions button[disabled]:hover{
     opacity: 0.5;
     cursor: default;
 }

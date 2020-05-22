@@ -53,6 +53,12 @@ export default class Main extends Component{
 
             <div className='product-list'>
 
+                <div className='newProduct'>
+                    <Link to={`/create`}>
+                        Cria um novo Produto
+                    </Link>
+                </div>
+
                 {products.map(
                     product => (
                         <article key={product._id}>

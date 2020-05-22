@@ -1,30 +1,43 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 
 import './styles.css';
 
-export default class Product extends Component{
+export default function Product( props ){
 
-    state={
-        product: {},
+    const [firstTime, setFirstTime]     = useState(true);
+    const [prodId]                      = useState(props.match.params.id);
+    const [product, setProduct]         = useState({});
+
+    async function getInfo(){
+
+        if(firstTime){
+
+             setFirstTime(false);
+
+             const response = await api.get(`/products/${prodId}`);
+     
+             setProduct(response.data);
+        }
+ 
+    };
+
+    useEffect(() => { getInfo(); });
+
+    async function deleteProd(){
+
+        const response = await api.delete(`/products/${prodId}`);
+
+        alert("Apagado com sucesso!");
+
+        props.history.push(`/`);
     }
 
-    async componentDidMount(){
-        const { id } = this.props.match.params;
+    return (
 
-        const response = await api.get(`/products/${id}`);
-
-        this.setState( { product: response.data} );
-    }
-
-    render(){
-
-        const { product } = this.state;
-
-        return (
-
-           <div className='product-info'>
+        <div className='product-info'>
 
             <h1>{product.title}</h1>
             <p>{product.description}</p>
@@ -35,9 +48,14 @@ export default class Product extends Component{
                 </a>
             </p>
 
-           </div> 
+            <div className="product-btns">
+                    <Link to={`/edite/${prodId}`}><button >Editar</button></Link>
+                    <button onClick={deleteProd} >Apagar</button>
+                    <Link to={'/'}><button>Voltar</button></Link>
+            </div>
 
-        );
-    }
+        </div> 
+
+    );
     
 }
